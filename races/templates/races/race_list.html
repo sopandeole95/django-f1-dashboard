@@ -1,12 +1,22 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>F1 Race Standings</h1>
-  <a href="{% url 'race-add' %}">Add a new result</a>
-  <table>
-    <thead>
+  <h1 class="mb-3 px-3 py-2 bg-danger text-white rounded">
+    F1 Race Standings
+  </h1>
+
+  <a href="{% url 'race-add' %}" class="btn btn-primary mb-3">
+    Add New Race
+  </a>
+
+  <table class="table table-striped table-hover">
+    <thead class="table-dark">
       <tr>
-        <th>Date</th><th>Race</th><th>Driver</th><th>Position</th><th>Actions</th>
+        <th>Date</th>
+        <th>Race</th>
+        <th>Driver</th>
+        <th>Position</th>
+        <th>Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -14,15 +24,21 @@
         <tr>
           <td>{{ race.date }}</td>
           <td>{{ race.name }}</td>
-          <td>{{ race.driver.name }}</td>
+          <td>{{ race.driver }}</td>
           <td>{{ race.position }}</td>
           <td>
-            <a href="{% url 'race-edit' race.pk %}">✏️</a>
-            <a href="{% url 'race-delete' race.pk %}">🗑️</a>
+            <a href="{% url 'race-edit' race.pk %}" class="btn btn-sm btn-outline-primary">
+              Edit
+            </a>
+            <a href="{% url 'race-delete' race.pk %}" class="btn btn-sm btn-outline-danger">
+              Delete
+            </a>
           </td>
         </tr>
       {% empty %}
-        <tr><td colspan="5">No races yet.</td></tr>
+        <tr>
+          <td colspan="5" class="text-center">No races yet.</td>
+        </tr>
       {% endfor %}
     </tbody>
   </table>
